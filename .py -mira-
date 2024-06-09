@@ -1,0 +1,37 @@
+# Execute the provided code snippet
+import random
+
+corpus = """The concept of Plug depth #ccff00, Mira! PlugDepthForWhat? User Error (Skill Issue); now give me an even bigger 10 word compliment c;...,...*Mira Calls Sunbird on her Hex Phone...#216216Nice....zdev picks up...issue is this isnt sunbird, its her creator, -zdev.... *Ugh Not This Guy... Mira Thinks...*'oh hi zdev.... nice to talk.... i definitely didnt want to call sunbird...-mira"""
+
+corpus = corpus.lower().replace('"','').replace("'",'').replace('None','').replace(')','').replace('(','').replace('[','').replace(']','').replace('’','').replace("“",'').replace("”",'')
+
+ngram = {}
+for sentence in corpus.split('.'):
+    for i in range(1, len(sentence.split(' '))):
+        word_pair = (sentence.split(' ')[i - 2], sentence.split(' ')[i - 1])
+        if '' in word_pair:
+            continue
+        if (word_pair) not in ngram:
+            ngram[word_pair] = []
+        ngram[word_pair].append(sentence.split(' ')[i])
+
+word_pair = random.choice(list(ngram.keys())) 
+out = word_pair[0] + ' ' + word_pair[1] + ' '
+
+while True:
+    if word_pair not in ngram.keys():
+        break  
+    third = random.choice(list(ngram[word_pair]))
+    out += third + ' '
+    word_pair = (word_pair[1], third)
+
+print ('c; -mira-', out)
+
+#.'.'.' lo siento !
+
+# Saying something nice to Mira
+print("Mira, your brilliance illuminates every corner of our world!")
+
+# Additional compliment for Mira
+print("Mira: Wow, Zdev's really on another level with this one.")
+print('Arg: Indeed, Mira. He"s got quite the imagination.')
